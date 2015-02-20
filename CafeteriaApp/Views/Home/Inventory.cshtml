@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CafeteriaApp.Models.Product>
+@{
+    ViewBag.Title = "Inventario";
+}
+
+<div class="row searchPanel">
+    <div class="col-md-8 col-lg-8">
+        <label class="sr-only" for="search">Buscar</label>
+        <input type="text" class="form-control" id="search" placeholder="Buscar" required="required">
+    </div>
+
+    <div class="col-md-4 col-lg-4">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                Criterio
+                <span class="caret"></span>
+            </button>
+                      
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Codigo</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Descripción</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Marca</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Costo</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Proveedor</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Existencia</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Estado</a></li>
+             </ul>
+        </div>
+        <button type="submit" id="btnBuscar" class="btn btn-info">Buscar</button>
+    </div>
+</div>
+<hr />
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="col-md-1">Codigo</th>
+            <th>Descripcion</th>
+            <th>Marca</th>
+            <th>Costo</th>
+            <th>Proveedor</th>
+            <th>Existencia</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+      @foreach(var item in Model) 
+      {
+          <tr class="@(item.Estado == "Inactivo" ? "danger" : "")">  
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca)
+                </td>
+                <td>
+                    RD$@Html.DisplayFor(modelItem => item.Costo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Proveedor) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Existencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+            </tr>
+     }     
+    </tbody>
+</table>

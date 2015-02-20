@@ -1,0 +1,49 @@
+﻿@using CafeteriaApp.Helpers;
+@{
+    ViewBag.Title = "Inicio";
+
+    String[] infoT = new String[3] { "Campus", "Codigo", "Local" };
+    String[] infoD = new String[3] { "Nicolas Pichardo", "001", "Apectito" };
+    var contentL = Html.ContentBox(3, infoT, infoD);
+
+    infoT = new String[3] { "Ventas", "Clientes", "Ganancias" };
+    infoD = new String[3] { "23", "12", "RD$ 8569" };
+    var contentRe = Html.ContentBox(3, infoT, infoD);
+
+    infoT = new String[4] { "Sprite", "Doritos", "Cheetos", "Coca-Cola" };
+    infoD = new String[4] { "20", "40", "35", "15" };
+    var contentFS = Html.ContentBox(4, infoT, infoD);
+
+    infoT = new String[4] { "Identificador", "Nombre", "Cedula", "Tipo" };
+    infoD = new String[4] { "Luisa15", "Luisa Rosario", "001-5623451-5", "Empleado" };
+    var contentPI = Html.ContentBox(4, infoT, infoD);
+
+
+    infoT = new String[4] { "Primero", "Segundo", "Tercero", "Cuarto" };
+    infoD = new String[4]  { "Ángel Piña", "Gabriel Rivas", "Cindy Gomez", "Pilar Mireles" };
+    var contentTC = Html.ContentBox(4, infoT, infoD);
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.Box("Informacion Local", contentL, "modal")
+    </div>
+    <div class="col-md-4">
+        @Html.Box("Resumen del Día", contentRe, "modal")
+    </div>
+    <div class="col-md-4">
+        @Html.Box("Próximamente fuera de Stock", contentFS, "modal")
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.Box("Información del Perfil", contentPI, "modal")
+    </div>
+    <div class="col-md-4">
+        @Html.Box("Top X - Mejores Clientes", contentTC, "modal")
+    </div>
+    <div class="col-md-4">
+        @Html.Box("Notificaciones", "", "modal")    
+    </div>
+</div>

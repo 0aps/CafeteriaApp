@@ -1,0 +1,88 @@
+﻿@model IEnumerable<CafeteriaApp.Models.Order>
+
+@{
+    ViewBag.Title = "Ordenes";
+}
+
+<div class="row searchPanel">
+    <div class="col-md-8 col-lg-8">
+        <label class="sr-only" for="search">Buscar</label>
+        <input type="text" class="form-control" id="search" placeholder="Buscar" required="required">
+    </div>
+
+    <div class="col-md-4 col-lg-4">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                Criterio
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">No. Factura</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Artículo</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cliente</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Empleado</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Fecha</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Estado</a></li>
+            </ul>
+        </div>
+        <button type="submit" id="btnBuscar" class="btn btn-info">Buscar</button>
+    </div>
+</div>
+<hr />
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="col-md-1">No.</th>
+            <th>Cliente</th>
+            <th>Artículos</th>
+            <th>Empleado</th>
+            <th>Total</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+   @foreach (var item in Model)
+{
+    <tr class="@(item.Estado == true ? "success" : "warning") ">
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Articulos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empleado)
+        </td>
+        <td>
+            RD$@Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            <div class="row">
+                <div class="col-md-8">
+                    @(item.Estado == true ? "Despachada" : "En Proceso")
+                </div>
+                 <div class=" col-md-4">
+                    <a href="@("/Order/Edit/"+item.Id)" class="text-right">
+                        <span style="font-size:18px;" class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="@("/Order/Delete/"+item.Id)" class="text-right">
+                        <span style="font-size:18px;" class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+           </div>
+        </td>
+    </tr>
+}
+      </tbody>
+</table>
+<div class="container">
+        @Html.ActionLink("Agregar Orden", "Create", "Order", null, new { @class = "btn btn-info pull-right" })
+</div>

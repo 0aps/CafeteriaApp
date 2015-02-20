@@ -1,0 +1,72 @@
+﻿@model CafeteriaApp.Models.Order
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+<h2>Borrar</h2>
+
+<h3>¿Está seguro que desea borrar el registro?</h3>
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Articulos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Articulos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
