@@ -3,32 +3,27 @@
     ViewBag.Title = "Inventario";
 }
 
-<div class="row searchPanel">
-    <div class="col-md-8 col-lg-8">
-        <label class="sr-only" for="search">Buscar</label>
-        <input type="text" class="form-control" id="search" placeholder="Buscar" required="required">
-    </div>
-
-    <div class="col-md-4 col-lg-4">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                Criterio
-                <span class="caret"></span>
-            </button>
-                      
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Codigo</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Descripción</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Marca</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Costo</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Proveedor</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Existencia</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Estado</a></li>
-             </ul>
+<form action="/Home/Inventory" method="get">
+    <div class="row searchPanel">
+        <div class="col-md-8 col-lg-8">
+            <label class="sr-only" for="search">Buscar</label>
+            <input type="text" class="form-control" name="searchTerm" id="search" placeholder="Buscar" required="required">
         </div>
-        <button type="submit" id="btnBuscar" class="btn btn-info">Buscar</button>
+        <div class="col-md-4 col-lg-4">
+            <select name="type" class="form-control" id="dropdownMenu1">
+                <option value="" disabled selected>Criterio</option>
+                <option value="Cod">Codigo</option>
+                <option value="Desc">Descripcion</option>
+                <option value="Marc">Marca</option>
+                <option value="Cost">Costo</option>
+                <option value="Prov">Proveedor</option>
+                <option value="Exist">Existencia</option>
+                <option value="State">Estado</option>
+            </select>
+            <button type="submit" id="btnBuscar" class="btn btn-info">Buscar</button>
+        </div>
     </div>
-</div>
+</form>
 <hr />
 
 <table class="table table-striped table-bordered">

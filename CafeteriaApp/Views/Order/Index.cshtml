@@ -3,31 +3,26 @@
 @{
     ViewBag.Title = "Ordenes";
 }
-
+<form action="/Order" method="get">
 <div class="row searchPanel">
     <div class="col-md-8 col-lg-8">
         <label class="sr-only" for="search">Buscar</label>
-        <input type="text" class="form-control" id="search" placeholder="Buscar" required="required">
+        <input type="text" class="form-control" name="searchTerm" id="search" placeholder="Buscar" required="required">
     </div>
-
     <div class="col-md-4 col-lg-4">
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                Criterio
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">No. Factura</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Artículo</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cliente</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Empleado</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Fecha</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Estado</a></li>
-            </ul>
-        </div>
+        <select name="type" class="form-control" id="dropdownMenu1">
+            <option value="" disabled selected>Criterio</option>
+            <option value="noFac">No. Factura</option>
+            <option value="Art">Artículo</option>
+            <option value="Cli">Cliente</option>
+            <option value="Empl">Empleado</option>
+            <option value="Date">Fecha</option>
+            <option value="State">Estado</option>
+        </select>
         <button type="submit" id="btnBuscar" class="btn btn-info">Buscar</button>
     </div>
 </div>
+</form>
 <hr />
 
 <table class="table table-striped table-bordered">

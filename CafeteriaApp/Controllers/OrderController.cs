@@ -16,8 +16,40 @@ namespace CafeteriaApp.Controllers
         private CafeteriaDb db = new CafeteriaDb();
 
         // GET: /Order/
-        public ActionResult Index()
+        public ActionResult Index(String searchTerm, String type)
         {
+            if (searchTerm != null && type != null)
+            {   
+                if(type == "State")
+                {
+                    if(searchTerm == "Despachada")
+                        return View(db.Orders.Where(Order => Order.Estado == true));
+                    else
+                        return View(db.Orders.Where(Order => Order.Estado == false));
+                }
+                else if(type == "noFac")
+                {
+                    int id = int.Parse(searchTerm);
+                        return View(db.Orders.Where(Order => Order.Id == id));
+                }
+                else if(type == "Art")
+                {
+                        int cantidad = int.Parse(searchTerm);
+                        return View(db.Orders.Where(Order => Order.Id == cantidad));
+                }
+                else if(type == "Cli" || type == "Empl")
+                {
+                    return View(db.Orders.Where(Order => 
+                                            type=="Cli"  && Order.Cliente.Contains(searchTerm) ||
+                                            type=="Empl" && Order.Empleado.Contains(searchTerm)) );
+                }
+                else if(type == "Date")
+                {
+                    DateTime date = DateTime.Parse(searchTerm);
+                    return View(db.Orders.Where(Order => Order.Fecha == date));
+                
+                }          
+           }
             return View(db.Orders.ToList());
         }
 
