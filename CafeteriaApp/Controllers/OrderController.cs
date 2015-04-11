@@ -7,10 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CafeteriaApp.Models;
+using Microsoft.Reporting.WebForms;
+using System.IO;
+using CafeteriaApp.Attributes;
 
 namespace CafeteriaApp.Controllers
 {
-    [Authorize]
+    [AuthorizePimpedAttribute]
     public class OrderController : Controller
     {
         private CafeteriaDb db = new CafeteriaDb();
@@ -146,6 +149,57 @@ namespace CafeteriaApp.Controllers
             db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Report(string id)
+        {
+            LocalReport lr = new LocalReport();
+            string path = Path.Combine(Server.MapPath("~/Reports"), "Reporte.rdlc");
+            if (System.IO.File.Exists(path))
+            {
+                lr.ReportPath = path;
+            }
+            else
+            {
+                return View("Index");
+            }
+            List<Order> cm = new List<Order>();
+            cm = db.Orders.ToList();
+            
+            ReportDataSource rd = new ReportDataSource("DataSet1", cm);
+            lr.DataSources.Add(rd);
+            string reportType = id;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+
+            string deviceInfo =
+
+            "<DeviceInfo>" +
+            "  <OutputFormat>" + id + "</OutputFormat>" +
+            "  <PageWidth>11in</PageWidth>" +
+            "  <PageHeight>11in</PageHeight>" +
+            "  <MarginTop>0.5in</MarginTop>" +
+            "  <MarginLeft>1in</MarginLeft>" +
+            "  <MarginRight>1in</MarginRight>" +
+            "  <MarginBottom>0.5in</MarginBottom>" +
+            "</DeviceInfo>";
+
+            Warning[] warnings;
+            string[] streams;
+            byte[] renderedBytes;
+
+            renderedBytes = lr.Render(
+                reportType,
+                deviceInfo,
+                out mimeType,
+                out encoding,
+                out fileNameExtension,
+                out streams,
+                out warnings);
+
+
+            return File(renderedBytes, mimeType);
         }
 
         protected override void Dispose(bool disposing)

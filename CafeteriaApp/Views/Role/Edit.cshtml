@@ -1,0 +1,22 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Editar rol";
+}
+
+<h2>Editar Rol</h2>
+
+@Html.ActionLink("Listar Roles", "Index") | @Html.ActionLink("Gestionar Roles", "ManageUserRoles")
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    <div>
+        Nombre del Rol:
+    </div>
+    <p>
+        @Html.TextBoxFor(model => model.Name)
+    </p>
+    <input type="submit" value="Guardar" />
+}

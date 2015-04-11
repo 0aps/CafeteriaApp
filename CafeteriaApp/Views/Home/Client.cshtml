@@ -68,3 +68,13 @@
         }
     </tbody>
 </table>
+
+@if (User.IsInRole("Administrador"))
+{
+    <div style="padding:10px; margin-top: 20px; text-align: center; border:1px solid black">
+        <a href="@Url.Action("Report",new {id= "PDF"})"><img src="../Content/images/pdf-icon.png" /> Reporte en PDF</a>
+        <a href="@Url.Action("Report",new {id= "Excel"})"> <img src="../Content/images/excel-icon.png" /> Report en Excel</a>
+        <a href="@Url.Action("Report",new {id= "Word"})"><img src="../Content/images/word-icon.ico" /> Reporte en Word</a>
+        <a href="@Url.Action("Report",new {id= "Image"})"><img src="../Content/images/image-icon.png"/> Reporte en Imagen</a>
+    </div>
+}

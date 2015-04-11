@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Gestionar Roles";
+}
+
+<h1>Gestionar Roles </h1>
+@Html.ActionLink("Crear nuevo rol", "Create") | @Html.ActionLink("Gestionar Roles", "ManageUserRoles")
+
+<hr style="margin:30px 0 30px;" />
+<h3 style="margin-bottom:20px;">Agregar rol a un usuario</h3>
+
+@using (Html.BeginForm("RoleAddToUser", "Role"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Usuario : @Html.TextBox("UserName") -> 
+        Rol: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Selecciona ...")
+
+    </p>
+
+    <input type="submit" value="Guardar" />
+}
+<hr style="margin:40px 0 40px;" />
+<h3 style="margin-bottom:20px;">Obtener roles de un usuario</h3>
+@using (Html.BeginForm("GetRoles", "Role"))
+{
+    @Html.AntiForgeryToken()
+    <p>
+        Usuario : @Html.TextBox("UserName")
+        <input style="margin-left: 30px;"type="submit" value="Obtener" />
+    </p>
+}
+
+@if (ViewBag.RolesForThisUser != null)
+{
+    <div style="margin-left:20px; margin-top: 20px; background-color:yellow;">
+        <h4>Roles para este usuario: </h4>
+        <ol>
+            @foreach (string s in ViewBag.RolesForThisUser)
+            {
+                <li>@s</li>
+            }
+        </ol>
+    </div>
+}
+
+<hr style="margin:40px 0 40px;" />
+<h3 style="margin-bottom:20px;">Eliminar rol de usuario</h3>
+
+@using (Html.BeginForm("DeleteRoleForUser", "Role"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <p>
+        Usuario : @Html.TextBox("UserName") ->
+        Rol: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Seleccionar ...")
+
+    </p>
+
+    <input onclick ="return confirm('¿Seguro quieres borrar el rol?')" type="submit" value="Borrar" />
+}

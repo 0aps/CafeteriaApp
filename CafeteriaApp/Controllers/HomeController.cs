@@ -1,4 +1,5 @@
-﻿using CafeteriaApp.Models;
+﻿using CafeteriaApp.Attributes;
+using CafeteriaApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace CafeteriaApp.Controllers
 {
-    [Authorize]
+    [AuthorizePimpedAttribute]
     public class HomeController : Controller
     {
         CafeteriaDb _db = new CafeteriaDb();

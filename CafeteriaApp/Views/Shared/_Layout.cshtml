@@ -19,6 +19,12 @@
                     <li class="@Html.IsSelected(action: "Index", controller: "Order")">@Html.ActionLink("Ordenes", "Index", "Order")</li>
                     <li class="@Html.IsSelected(action: "Inventory")">@Html.ActionLink("Inventario", "Inventory", "Home")</li>
                     <li class="@Html.IsSelected(action: "Client")">@Html.ActionLink("Clientes", "Client", "Home")</li>
+                    <li class ="@Html.IsSelected(action: "Index", controller: "Role")">
+                        @if (User.IsInRole("Administrador"))
+                        {
+                             @Html.ActionLink("Roles", "Index", "Role")
+                        }
+                   </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

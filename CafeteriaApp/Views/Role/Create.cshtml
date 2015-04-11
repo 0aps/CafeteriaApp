@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Crear rol";
+}
+
+<h2>Crea un nuevo rol</h2>
+@Html.ActionLink("Listar Roles", "Index") | @Html.ActionLink("Gestionar Roles", "ManageUserRoles")
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+        Nombre del Rol:
+    </div>
+    <p>
+        @Html.TextBox("RoleName")
+    </p>
+    <input type="submit" value="Guardar" />
+}
